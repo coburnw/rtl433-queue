@@ -28,11 +28,12 @@ DEBUG = False
 
 class RtlEventQueue(Queue.Queue):
     def __init__(self, protocol_id, model_name, device_id, parameter_name):
-        self.protocol = protocol_id
-        self.model_name = model_name
-        self.serial_number = device_id
-        self.parameter_name = parameter_name
+        self.protocol = str(protocol_id).strip()
+        self.model_name = str(model_name).strip()
+        self.serial_number = str(device_id).strip()
+        self.parameter_name = str(parameter_name).strip()
         self.line = None
+        
         super().__init__()
         return
     
@@ -187,7 +188,7 @@ if __name__ == '__main__':
 
     device_protocol = 74 # acurite 275rm sensor
     temp_queue = rtl.create_queue(device_protocol, '00275rm', device_id='8807', parameter_name='temperature_C')
-    #print('new queue {}'.format(temp_queue))
+    print('new queue {}'.format(temp_queue))
     
     rtl.open()
     print('opened')
